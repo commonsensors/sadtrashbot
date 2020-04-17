@@ -1,6 +1,5 @@
 certifi==2020.4.5.1
 chardet==3.0.4
-defer==1.0.6
 idna==2.9
 oauthlib==3.1.0
 psutil==3.4.2
