@@ -142,9 +142,9 @@ while True:
 	reply_to_mentions(word_dictionary)
 
     # post once for every 5000 tries
-	#if random.randint(1, 5000) == 1:
-	print('generating tweet...')
-	api.update_status(generate_tweet(word_dictionary))
+	if random.randint(1, 5000) == 1:
+		print('generating tweet...')
+		api.update_status(generate_tweet(word_dictionary))
 
 	print('sleep mode for 1 minute...\n')
 
