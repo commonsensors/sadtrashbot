@@ -141,8 +141,8 @@ while True:
 
 	reply_to_mentions(word_dictionary)
 
-    # post once for every 5000 tries
-	if random.randint(1, 300) == 1:
+    # post once for every 150 tries
+	if random.randint(1, 150) == 1:
 		print('generating tweet...')
 		api.update_status(generate_tweet(word_dictionary))
 
