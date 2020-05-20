@@ -130,7 +130,7 @@ def reply_to_mentions(word_dictionary):
 			f.close()
 
 			print('generating mention reply...')
-			api.update_status('@' + mention.user.screen_name + generate_tweet(word_dictionary), mention.id)
+			api.update_status('@' + mention.user.screen_name + ' ' + generate_tweet(word_dictionary), mention.id)
 
 
 
