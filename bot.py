@@ -129,7 +129,7 @@ def reply_to_mentions(word_dictionary):
 			f.write(str(last_seen_mention_id))
 			f.close()
 
-			print('generating mention reply...')
+			print('AWAKEN... generating mention reply...')
 			api.update_status('@' + mention.user.screen_name + ' ' + generate_tweet(word_dictionary), mention.id)
 
 
@@ -143,8 +143,8 @@ while True:
 
     # post once for every 150 tries
 	if random.randint(1, 150) == 1:
-		print('generating tweet...')
-		api.update_status(generate_tweet(word_dictionary))
+		print('AWAKEN... generating tweet...')
+		#api.update_status(generate_tweet(word_dictionary))
 
 	print('sleep mode for 1 minute...\n')
 
