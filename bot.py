@@ -101,7 +101,7 @@ def generate_tweet(word_dictionary):
 	status = ' '.join(status_words)
 
 	if(len(status) > 260):
-		status = '\U0001F97A'
+		status = random.choice(['\U0001F97A', '\U0001F644', '\U0001F912', '\U0001F61F'])
 
 	print('\t\'' + status + '\'')
 
@@ -129,7 +129,7 @@ def reply_to_mentions(word_dictionary):
 			f.write(str(last_seen_mention_id))
 			f.close()
 
-			print('AWAKEN... generating mention reply...')
+			print('AWAKEN... GENERATING MENTION REPLY TO ' + mention.user.screen_name + '...')
 			api.update_status('@' + mention.user.screen_name + ' ' + generate_tweet(word_dictionary), mention.id)
 
 
@@ -143,8 +143,8 @@ while True:
 
     # post once for every 150 tries
 	if random.randint(1, 150) == 1:
-		print('AWAKEN... generating tweet...')
-		#api.update_status(generate_tweet(word_dictionary))
+		print('AWAKEN... GENERATING TWEET...')
+		api.update_status(generate_tweet(word_dictionary))
 
 	print('sleep mode for 1 minute...\n')
 
