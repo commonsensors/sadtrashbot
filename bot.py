@@ -18,7 +18,6 @@ NUM_OF_TWEETS = 2000
 
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
-#api = tweepy.API(auth)
 api = tweepy.API(auth, wait_on_rate_limit=True)
 
 
@@ -100,8 +99,8 @@ def generate_tweet(word_dictionary):
 
 	status = ' '.join(status_words)
 
-	if(len(status) > 260):
-		status = random.choice(['\U0001F97A', '\U0001F644', '\U0001F912', '\U0001F61F'])
+	if(len(status) > 240):
+		status = random.choice(['\U0001F97A', '\U0001F644', '\U0001F912', '\U0001F61F', '\U0001F914', '\U0001F440', '\U0001F60F', '\U0001F4AF'])
 
 	print('\t\'' + status + '\'')
 
@@ -122,7 +121,7 @@ def reply_to_mentions(word_dictionary):
 
 	# write down the current mention you're about to respond and reply to it
 	for mention in reversed(mentions):
-		if mention.user.screen_name != api.me().screen_name:
+		if mention.user.screen_name != api.me().screen_name and mention != last_seen_mention_id:
 			last_seen_mention_id = mention.id
 
 			f = open('last_seen_mention_id.txt', 'w')
@@ -139,9 +138,9 @@ while True:
 	print('creating the markov chain dictionary...')
 	word_dictionary = markov()
 
-	#reply_to_mentions(word_dictionary)
+	reply_to_mentions(word_dictionary)
 
-    # post once for every 150 tries
+        # post once for every 150 tries
 	if random.randint(1, 150) == 1:
 		print('AWAKEN... GENERATING TWEET...')
 		api.update_status(generate_tweet(word_dictionary))
