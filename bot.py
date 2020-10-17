@@ -14,7 +14,7 @@ ACCESS_SECRET = environ['ACCESS_SECRET']
 USER_TO_COPY = environ['USER_TO_COPY']
 NUM_OF_TWEETS = 2000  # number of latest tweets to be read from the bot
 
-last_seen_mention_id = 1317538181227700224
+last_seen_mention_id = 1317549848401502209
 
 auth = tweepy.OAuthHandler(API_KEY, API_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
@@ -117,7 +117,7 @@ while True:
     print('creating the markov chain dictionary...')
     word_dictionary = markov()
 
-    #reply_to_mentions(word_dictionary)
+    reply_to_mentions(word_dictionary)
 
     # post randomly, once for every 150 tries
     if random.randint(1, 150) == 1:
