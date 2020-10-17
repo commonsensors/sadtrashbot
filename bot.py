@@ -14,7 +14,7 @@ ACCESS_SECRET = environ['ACCESS_SECRET']
 USER_TO_COPY = environ['USER_TO_COPY']
 NUM_OF_TWEETS = 2000  # number of latest tweets to be read from the bot
 
-last_seen_mention_id = "1316058945233063941"
+last_seen_mention_id = 1317538181227700224
 
 auth = tweepy.OAuthHandler(API_KEY, API_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
@@ -103,17 +103,13 @@ def generate_tweet(word_dictionary):
 def reply_to_mentions(word_dictionary):
     global last_seen_mention_id
 
-    # scan for new mentions
-    mentions = api.mentions_timeline(last_seen_mention_id, tweet_mode="extended")
+    for tweet in tweepy.Cursor(api.mentions_timeline, since_id=last_seen_mention_id, tweet_mode="extended").items():
+        last_seen_mention_id = tweet.id
 
-    # write down the current mention you're about to respond and reply to it
-    for mention in reversed(mentions):
-        if mention.user.screen_name != api.me().screen_name:
-            last_seen_mention_id = mention.id
-
-            print('\nAWAKEN... GENERATING MENTION REPLY TO ' + mention.user.screen_name + '...')
+        if tweet.user.screen_name != api.me().screen_name:
+            print('\nAWAKEN... GENERATING MENTION REPLY TO ' + tweet.user.screen_name + '...')
             print('last seen mention ID: ' + str(last_seen_mention_id) + '\n')
-            api.update_status('@' + mention.user.screen_name + ' ' + generate_tweet(word_dictionary), mention.id)
+            api.update_status('@' + tweet.user.screen_name + ' ' + generate_tweet(word_dictionary), tweet.id)
 
 
 while True:
