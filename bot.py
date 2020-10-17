@@ -121,7 +121,7 @@ while True:
     print('creating the markov chain dictionary...')
     word_dictionary = markov()
 
-    reply_to_mentions(word_dictionary)
+    #reply_to_mentions(word_dictionary)
 
     # post randomly, once for every 150 tries
     if random.randint(1, 150) == 1:
