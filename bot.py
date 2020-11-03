@@ -12,7 +12,7 @@ ACCESS_KEY = environ['ACCESS_KEY']
 ACCESS_SECRET = environ['ACCESS_SECRET']
 
 USER_TO_COPY = environ['USER_TO_COPY']
-NUM_OF_TWEETS = 2000  # number of latest tweets to be read from the bot
+NUM_OF_TWEETS = 2000  
 
 last_seen_mention_id = 1317549848401502209
 
