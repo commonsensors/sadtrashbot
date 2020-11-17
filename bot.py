@@ -14,7 +14,7 @@ ACCESS_SECRET = environ['ACCESS_SECRET']
 USER_TO_COPY = environ['USER_TO_COPY']
 NUM_OF_TWEETS = 2000  
 
-last_seen_mention_id = 1317549848401502209
+last_seen_mention_id = 1328427282873147393
 
 auth = tweepy.OAuthHandler(API_KEY, API_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
@@ -117,10 +117,10 @@ while True:
     print('creating the markov chain dictionary...')
     word_dictionary = markov()
 
-    # reply_to_mentions(word_dictionary)
+    reply_to_mentions(word_dictionary)
 
     # post randomly, once for every 150 tries
-    if random.randint(1, 150) == 1:
+    if random.randint(1, 400) == 1:
         print('\nAWAKEN... GENERATING TWEET...')
         api.update_status(generate_tweet(word_dictionary))
 
