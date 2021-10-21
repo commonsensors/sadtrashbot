@@ -2,6 +2,7 @@ import tweepy
 import re
 import random
 import time
+import datetime
 import os
 from os import environ
 
@@ -14,7 +15,7 @@ ACCESS_SECRET = environ['ACCESS_SECRET']
 USER_TO_COPY = environ['USER_TO_COPY']
 NUM_OF_TWEETS = 2000  
 
-last_seen_mention_id = 1328427282873147393
+last_seen_mention_id = 1451240772242653192
 
 auth = tweepy.OAuthHandler(API_KEY, API_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
@@ -106,25 +107,26 @@ def reply_to_mentions(word_dictionary):
     for tweet in tweepy.Cursor(api.mentions_timeline, since_id=last_seen_mention_id, tweet_mode="extended").items():
         last_seen_mention_id = tweet.id
 
-        if tweet.user.screen_name != api.me().screen_name:
-            print('\nAWAKEN... GENERATING MENTION REPLY TO ' + tweet.user.screen_name + '...')
+        if tweet.user.screen_name != api.me().screen_name and tweet.favorited == False:
+            print('\nreplying to ' + tweet.user.screen_name + '...')
             print('last seen mention ID: ' + str(last_seen_mention_id) + '\n')
             api.update_status('@' + tweet.user.screen_name + ' ' + generate_tweet(word_dictionary), tweet.id)
+            api.create_favorite(tweet.id)
 
 
 while True:
-    print("***************************************")
-    print('creating the markov chain dictionary...')
-    word_dictionary = markov()
-
-    #reply_to_mentions(word_dictionary)
+    print('***************************************')
+    print(datetime.datetime.now())
+    print('***************************************')
+    word_dictionary = markov()     
+    reply_to_mentions(word_dictionary)
 
     # post randomly, once for every 150 tries
-    if random.randint(1, 400) == 1:
-        print('\nAWAKEN... GENERATING TWEET...')
+    if random.randint(1, 3) == 1:
+        print('creating the markov chain dictionary...')
+        print('generating post...')
         api.update_status(generate_tweet(word_dictionary))
-
     print('\nsleep mode for 1 minute...')
-    print("***************************************")
+    print('***************************************\n')
 
     time.sleep(60)
