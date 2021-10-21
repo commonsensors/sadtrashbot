@@ -121,8 +121,8 @@ while True:
     word_dictionary = markov()     
     reply_to_mentions(word_dictionary)
 
-    # post randomly, once for every 150 tries
-    if random.randint(1, 3) == 1:
+    # post randomly, once for every 400 tries
+    if random.randint(1, 400) == 1:
         print('creating the markov chain dictionary...')
         print('generating post...')
         api.update_status(generate_tweet(word_dictionary))
